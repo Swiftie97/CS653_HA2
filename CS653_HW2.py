@@ -222,7 +222,9 @@ def question04():
         ax.set(title='Red Wine - {}'.format(distance_func_names[matrix_index]))
         ax.xaxis.set_ticks_position('top')
         plt.xticks(rotation=90)
-        plt.savefig('red_wine_{0}_{1}.png'.format(str(matrix_index), distance_func_list[matrix_index].__name__ ), dpi=150)
+
+        red_wine_file_path = os.path.join(PLOTS_FOLDER, 'q04_red_wine_{0}_{1}.png'.format(str(matrix_index), distance_func_list[matrix_index].__name__ ))
+        plt.savefig(red_wine_file_path, dpi=150)
         plt.close()
 
     for matrix_index, white_wine_matrix in enumerate(white_wine_matrix_list):
@@ -230,7 +232,7 @@ def question04():
         ax.set(title='White Wine - {}'.format(distance_func_names[matrix_index]))
         ax.xaxis.set_ticks_position('top')
         plt.xticks(rotation=90)
-        plt.savefig('white_wine_{0}_{1}.png'.format(str(matrix_index), distance_func_list[matrix_index].__name__ ), dpi=150)
+
+        white_wine_file_path = os.path.join(PLOTS_FOLDER, 'q04_white_wine_{0}_{1}.png'.format(str(matrix_index), distance_func_list[matrix_index].__name__ ))
+        plt.savefig(white_wine_file_path, dpi=150)
         plt.close()
-
-
