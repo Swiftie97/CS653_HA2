@@ -107,7 +107,11 @@ def question03():
     wine_white_scatter_subset = wine_white[['fixed acidity', 'volatile acidity', 'citric acid', 'residual sugar']]
 
     pd.plotting.scatter_matrix(wine_red_scatter_subset, alpha=0.2, figsize=(12, 12), c='red')
+    plt.savefig(os.path.join(PLOTS_FOLDER, 'q03_red_wine_scatter_matrix.png'))
+    plt.close()
     pd.plotting.scatter_matrix(wine_white_scatter_subset, alpha=0.2, figsize=(12, 12), c='gold')
+    plt.savefig(os.path.join(PLOTS_FOLDER, 'q03_white_wine_scatter_matrix.png'))
+    plt.close()
 
 def question04():
     # Helper functions for distance functions
