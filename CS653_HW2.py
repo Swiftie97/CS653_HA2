@@ -58,6 +58,7 @@ def question01():
 
     plt.tight_layout()
     plt.savefig(os.path.join(PLOTS_FOLDER, 'q01_histograms.png'))
+    plt.close()
 
 def question02():
     def create_boxplots(attribute, ylim_range, call_index):
@@ -94,6 +95,7 @@ def question02():
         plt.tight_layout()
         plt.savefig(os.path.join(PLOTS_FOLDER, 'q02_' + str(call_index) + \
                                  '_' + attribute.replace(' ', '_') + '_' + 'boxplots.png'))
+        plt.close()
 
     create_boxplots('fixed acidity', (3,17), 0)
     create_boxplots('volatile acidity', (0, 1.7), 1)
