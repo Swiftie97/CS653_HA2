@@ -33,8 +33,8 @@ def question01():
     wine_white_quality = wine_white['quality'] # Range 3-9
 
     # Ranges found with below functions
-    print("Red wine quality scores range: [{0},{1}]".format(wine_red_quality.min(), wine_red_quality.max()))
-    print("White wine quality scores range: [{0},{1}]".format(wine_white_quality.min(), wine_white_quality.max()))
+    # print("Red wine quality scores range: [{0},{1}]".format(wine_red_quality.min(), wine_red_quality.max()))
+    # print("White wine quality scores range: [{0},{1}]".format(wine_white_quality.min(), wine_white_quality.max()))
 
     # Format bin size
     bins = [0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5, 10.5]
