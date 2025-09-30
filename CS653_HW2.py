@@ -28,7 +28,6 @@ PLOTS_FOLDER = 'plots'
 
 os.makedirs(PLOTS_FOLDER, exist_ok=True)
 
-
 def question01():
     wine_red_quality = wine_red['quality'] # Range 3-8
     wine_white_quality = wine_white['quality'] # Range 3-9
@@ -61,7 +60,7 @@ def question01():
     plt.savefig(os.path.join(PLOTS_FOLDER, 'q01_histograms.png'))
 
 def question02():
-    def create_boxplots(attribute, ylim_range):
+    def create_boxplots(attribute, ylim_range, call_index):
         wine_red_attribute = wine_red[attribute]
         wine_white_attribute = wine_white[attribute]
 
@@ -93,12 +92,13 @@ def question02():
                 axes[i][0].set_ylabel("{} - automatic y limits".format(attribute))
 
         plt.tight_layout()
-        plt.show()
+        plt.savefig(os.path.join(PLOTS_FOLDER, 'q02_' + str(call_index) + \
+                                 '_' + attribute.replace(' ', '_') + '_' + 'boxplots.png'))
 
-    create_boxplots('fixed acidity', (3,17))
-    create_boxplots('volatile acidity', (0, 1.7))
-    create_boxplots('pH', (2.6, 4.2))
-    create_boxplots('density', (0.98, 1.04))
+    create_boxplots('fixed acidity', (3,17), 0)
+    create_boxplots('volatile acidity', (0, 1.7), 1)
+    create_boxplots('pH', (2.6, 4.2), 2)
+    create_boxplots('density', (0.98, 1.04), 3)
 
 def question03():
     wine_red_scatter_subset = wine_red[['fixed acidity', 'volatile acidity', 'citric acid', 'residual sugar']]
