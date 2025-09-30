@@ -219,10 +219,13 @@ def question04():
     white_wine_matrix_list = generateMatricesForDataset(wine_white_sorted_quality.to_numpy(), distance_func_list)
 
     for matrix_index, red_wine_matrix in enumerate(red_wine_matrix_list):
+        plt.figure(figsize=(14, 12))
         ax = sns.heatmap(red_wine_matrix, rasterized=True)
         ax.set(title='Red Wine - {}'.format(distance_func_names[matrix_index]))
+        ax.set_aspect('equal')
         ax.xaxis.set_ticks_position('top')
         plt.xticks(rotation=90)
+        plt.tight_layout()
 
         red_wine_file_path = os.path.join(PLOTS_FOLDER, 'q04_red_wine_{0}_{1}.png'.format(str(matrix_index), distance_func_list[matrix_index].__name__ ))
         plt.savefig(red_wine_file_path, dpi=150)
@@ -231,10 +234,13 @@ def question04():
         gc.collect()
 
     for matrix_index, white_wine_matrix in enumerate(white_wine_matrix_list):
+        plt.figure(figsize=(14, 12))
         ax = sns.heatmap(white_wine_matrix, rasterized=True)
         ax.set(title='White Wine - {}'.format(distance_func_names[matrix_index]))
+        ax.set_aspect('equal')
         ax.xaxis.set_ticks_position('top')
         plt.xticks(rotation=90)
+        plt.tight_layout()
 
         white_wine_file_path = os.path.join(PLOTS_FOLDER, 'q04_white_wine_{0}_{1}.png'.format(str(matrix_index), distance_func_list[matrix_index].__name__ ))
         plt.savefig(white_wine_file_path, dpi=150)
