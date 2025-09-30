@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 import numba
+import os
 
 pd.set_option("mode.copy_on_write", True) # Will be default in pandas 3.0
 
@@ -22,6 +23,11 @@ if not wine_quality_white_filename.exists():
 
 wine_red = pd.read_csv(wine_quality_red_filename, sep=';') # 1599 data points
 wine_white = pd.read_csv(wine_quality_white_filename, sep=';') # 4898 data points
+
+PLOTS_FOLDER = 'plots'
+
+os.makedirs(PLOTS_FOLDER, exist_ok=True)
+
 
 def question01():
     wine_red_quality = wine_red['quality'] # Range 3-8
@@ -52,7 +58,7 @@ def question01():
     ax2.set_ylabel("Count")
 
     plt.tight_layout()
-    plt.show()
+    plt.savefig(os.path.join(PLOTS_FOLDER, 'q01_histograms.png'))
 
 def question02():
     def create_boxplots(attribute, ylim_range):
