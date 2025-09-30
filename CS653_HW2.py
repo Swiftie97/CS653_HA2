@@ -7,6 +7,7 @@ import seaborn as sns
 import numpy as np
 import numba
 import os
+import gc
 
 pd.set_option("mode.copy_on_write", True) # Will be default in pandas 3.0
 
@@ -226,6 +227,8 @@ def question04():
         red_wine_file_path = os.path.join(PLOTS_FOLDER, 'q04_red_wine_{0}_{1}.png'.format(str(matrix_index), distance_func_list[matrix_index].__name__ ))
         plt.savefig(red_wine_file_path, dpi=150)
         plt.close()
+        del ax
+        gc.collect()
 
     for matrix_index, white_wine_matrix in enumerate(white_wine_matrix_list):
         ax = sns.heatmap(white_wine_matrix, rasterized=True)
@@ -236,3 +239,6 @@ def question04():
         white_wine_file_path = os.path.join(PLOTS_FOLDER, 'q04_white_wine_{0}_{1}.png'.format(str(matrix_index), distance_func_list[matrix_index].__name__ ))
         plt.savefig(white_wine_file_path, dpi=150)
         plt.close()
+        # Need to garbage collect immediately, plotting is resource intensive with this many points for heatmap
+        del ax
+        gc.collect()
