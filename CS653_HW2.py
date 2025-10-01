@@ -243,7 +243,7 @@ def question04():
     @numba.njit
     def mahalanobis_distance(rowA, rowB, inverse_covariance_matrix):
         """
-        Compute Mahamahalanobis distance.
+        Compute Mahalanobis distance.
 
         Args:
             rowA (np.ndarray): row of dataset as a 1D array.
@@ -251,7 +251,7 @@ def question04():
             inverse_covariance_matrix (np.ndarray): Precomputed inverse covariance matrix.
 
         Returns:
-            float: Mahamahalanobis distance 5 between `rowA` and `rowB`.
+            float: Mahalanobis distance between `rowA` and `rowB`.
         """
         diff = rowA - rowB
         # To allow for transpose
@@ -264,14 +264,14 @@ def question04():
     @numba.njit
     def cosine_similarity(rowA, rowB):
         """
-        Compute cosine simularity.
+        Compute cosine similarity.
 
         Args:
             rowA (np.ndarray): row of dataset as a 1D array.
             rowB (np.ndarray): row of dataset as a 1D array.
 
         Returns:
-            float: Cosine simularity between `rowA` and `rowB`.
+            float: Cosine similarity between `rowA` and `rowB`.
         """
         return rowA.dot(rowB) / np.sqrt(np.square(rowA).sum()) / np.sqrt(np.square(rowB).sum())
 
