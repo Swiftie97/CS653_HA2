@@ -12,7 +12,6 @@ import gc
 pd.set_option("mode.copy_on_write", True) # Will be default in pandas 3.0
 
 # Read in data
-pd.set_option("mode.copy_on_write", True)
 cwd = Path().cwd()
 wine_quality_red_filename = Path('winequality-red.csv')
 wine_quality_white_filename = Path('winequality-white.csv')
