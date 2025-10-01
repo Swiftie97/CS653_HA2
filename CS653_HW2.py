@@ -202,6 +202,25 @@ def question04():
             matrix = generateMatrix(data, distance_function_index, inverse_covariance_matrix)
             matrix_list.append(matrix)
         return matrix_list
+    
+    def plotMatrix(title_start, matrix, matrix_index, distance_func_names, distance_func_list):
+        plt.figure(figsize=(14, 12))
+        ax = sns.heatmap(matrix, rasterized=True)
+        plot_title = title_start + ' - {}'.format(distance_func_names[matrix_index])
+        ax.set(title=plot_title)
+        ax.set_aspect('equal')
+        ax.xaxis.set_ticks_position('top')
+        plt.xticks(rotation=90)
+        plt.tight_layout()
+
+        dist_f_name = distance_func_list[matrix_index].__name__ 
+        file_name = f"q04_{title_start.replace(' ', '_')}_{str(matrix_index)}_{dist_f_name}.png"
+
+        file_path = os.path.join(PLOTS_FOLDER, file_name)
+        plt.savefig(file_path, dpi=150)
+        plt.close()
+        del ax
+        gc.collect()
 
     wine_red_sorted_quality = wine_red.sort_values(by='quality')
     wine_white_sorted_quality = wine_white.sort_values(by='quality')
@@ -215,36 +234,21 @@ def question04():
     distance_func_names = ['Euclidean', 'Minkowski Distance, r=1', 'Minkowski Distance, r=3', 'Minkowski Distance r=5', 
                         'Mahalanobis Distance', 'Cosine Similarity', 'Correlation', 'Linear Combo']
 
+    wine_red_sorted_quality_sampled10 = wine_red_sorted_quality[::10]
+    wine_white_sorted_quality_sampled10 = wine_white_sorted_quality[::10]
+
+    red_wine_sampled10_matrix_list = generateMatricesForDataset(wine_red_sorted_quality_sampled10.to_numpy(), distance_func_list)
+    for matrix_index, red_wine_matrix_sampled in enumerate(red_wine_sampled10_matrix_list):
+        plotMatrix('Red Wine (sampled factor of 10)', red_wine_matrix_sampled, matrix_index, distance_func_names, distance_func_list)
+
+    white_wine_sampled10_matrix_list = generateMatricesForDataset(wine_white_sorted_quality_sampled10.to_numpy(), distance_func_list)
+    for matrix_index, white_wine_matrix_sampled in enumerate(white_wine_sampled10_matrix_list):
+        plotMatrix('White Wine (sampled factor of 10)', white_wine_matrix_sampled, matrix_index, distance_func_names, distance_func_list)
+
     red_wine_matrix_list = generateMatricesForDataset(wine_red_sorted_quality.to_numpy(), distance_func_list)
-    white_wine_matrix_list = generateMatricesForDataset(wine_white_sorted_quality.to_numpy(), distance_func_list)
-
     for matrix_index, red_wine_matrix in enumerate(red_wine_matrix_list):
-        plt.figure(figsize=(14, 12))
-        ax = sns.heatmap(red_wine_matrix, rasterized=True)
-        ax.set(title='Red Wine - {}'.format(distance_func_names[matrix_index]))
-        ax.set_aspect('equal')
-        ax.xaxis.set_ticks_position('top')
-        plt.xticks(rotation=90)
-        plt.tight_layout()
+        plotMatrix('Red Wine', red_wine_matrix, matrix_index, distance_func_names, distance_func_list)
 
-        red_wine_file_path = os.path.join(PLOTS_FOLDER, 'q04_red_wine_{0}_{1}.png'.format(str(matrix_index), distance_func_list[matrix_index].__name__ ))
-        plt.savefig(red_wine_file_path, dpi=150)
-        plt.close()
-        del ax
-        gc.collect()
-
+    white_wine_matrix_list = generateMatricesForDataset(wine_white_sorted_quality.to_numpy(), distance_func_list)
     for matrix_index, white_wine_matrix in enumerate(white_wine_matrix_list):
-        plt.figure(figsize=(14, 12))
-        ax = sns.heatmap(white_wine_matrix, rasterized=True)
-        ax.set(title='White Wine - {}'.format(distance_func_names[matrix_index]))
-        ax.set_aspect('equal')
-        ax.xaxis.set_ticks_position('top')
-        plt.xticks(rotation=90)
-        plt.tight_layout()
-
-        white_wine_file_path = os.path.join(PLOTS_FOLDER, 'q04_white_wine_{0}_{1}.png'.format(str(matrix_index), distance_func_list[matrix_index].__name__ ))
-        plt.savefig(white_wine_file_path, dpi=150)
-        plt.close()
-        # Need to garbage collect immediately, plotting is resource intensive with this many points for heatmap
-        del ax
-        gc.collect()
+        plotMatrix('White Wine', white_wine_matrix, matrix_index, distance_func_names, distance_func_list)
