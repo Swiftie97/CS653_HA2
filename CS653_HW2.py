@@ -165,7 +165,7 @@ def question04():
     # Euclidean + Minkowski distance where r=1
     @numba.njit
     def linear_combo(rowA, rowB):
-        return euclidean(rowA, rowB) + minkowski_distance_1(rowA, rowB)
+        return 0.5 * euclidean(rowA, rowB) + 0.5 * minkowski_distance_1(rowA, rowB)
 
     @numba.njit
     def get_distance_function_by_index(rowA, rowB, dist_function_index, inverse_covariance_matrix):
